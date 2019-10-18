@@ -38,11 +38,11 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [x] Describe how web servers work.
 
-   Web servers are computers with software listening to incomming requests and responding to them. Specific servers have their IP addresses mapped to more memorable domain names and API endpoints are selected by the request url path.
+   Web servers are computers with software listening to incomming requests and responding to them. Specific servers have their IP addresses mapped to more memorable domain names and API endpoints are selected by the request url pathing.
 
 - [x] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
 
-   The methods are: Create: post, Read: get, Update: put/patch, Delete: delete
+   The methods are: Create: `post`, Read: `get`, Update: `put`/`patch`, Delete: `delete`
 
 ## Project Set Up
 
@@ -63,9 +63,9 @@ Follow these steps to set up and work on your project:
 
 Follow these steps for completing your project:
 
-- [ ] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's  Repo).
-- [ ] Add your Project Manager as a Reviewer on the Pull-request
-- [ ] PM then will count the HW as done by  merging the branch back into master.
+- [x] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's  Repo).
+- [x] Add your Project Manager as a Reviewer on the Pull-request
+- [x] PM then will count the HW as done by  merging the branch back into master.
 
 ## Minimum Viable Product
 
@@ -102,5 +102,5 @@ Build a login form to authenticate your users.
 
 **Data Visualization**
 
-- [ ] Look at [Potion JS](https://potion.js.org/). This is the library used to display the color data
+- [x] Look at [Potion JS](https://potion.js.org/). This is the library used to display the color data
 - [ ] Play around with the data visualization happening in `Bubbles.js`. Have fun with this! Try different components from the library, or see if you can add props to change the UI a bit.

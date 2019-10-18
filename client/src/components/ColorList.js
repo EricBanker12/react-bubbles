@@ -9,7 +9,7 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors }) => {
-  console.log(colors);
+  // console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -23,14 +23,25 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
-    axiosWithAuth().put(`/api/colors/${colorToEdit.id}`, colorToEdit)
-    .then(resp => {
-      console.log(resp)
-      updateColors(colors.map(e => e.id === resp.data.id ? resp.data : e))
-      setEditing(false)
-      setColorToEdit(initialColor)
-    })
-    .catch(err => console.log(err.response))
+    if (isNaN(colorToEdit.id)) {
+      axiosWithAuth().post(`/api/colors`, colorToEdit)
+      .then(resp => {
+        // console.log(resp)
+        updateColors(resp.data)
+        setEditing(false)
+        // setColorToEdit(initialColor)
+      })
+      .catch(err => console.log(err.response))
+    } else {
+      axiosWithAuth().put(`/api/colors/${colorToEdit.id}`, colorToEdit)
+      .then(resp => {
+        // console.log(resp)
+        updateColors(colors.map(e => e.id === resp.data.id ? resp.data : e))
+        setEditing(false)
+        // setColorToEdit(initialColor)
+      })
+      .catch(err => console.log(err.response))
+    }
   };
 
   const deleteColor = (e, color) => {
@@ -63,9 +74,12 @@ const ColorList = ({ colors, updateColors }) => {
           </li>
         ))}
       </ul>
+      <div className="button-row">
+        <button onClick={()=>{editColor(initialColor)}}>Add a color</button>
+      </div>
       {editing && (
         <form onSubmit={saveEdit}>
-          <legend>edit color</legend>
+          <legend>{isNaN(colorToEdit.id)?'add':'edit'} color</legend>
           <label>
             color name:
             <input
@@ -73,6 +87,7 @@ const ColorList = ({ colors, updateColors }) => {
                 setColorToEdit({ ...colorToEdit, color: e.target.value })
               }
               value={colorToEdit.color}
+              required
             />
           </label>
           <label>
@@ -85,6 +100,9 @@ const ColorList = ({ colors, updateColors }) => {
                 })
               }
               value={colorToEdit.code.hex}
+              pattern='#[a-f|A-F|0-9]{3}|#[a-f|A-F|0-9]{6}'
+              title='Must be HTML hex code between "#000000" and "#FFFFFF"'
+              required
             />
           </label>
           <div className="button-row">

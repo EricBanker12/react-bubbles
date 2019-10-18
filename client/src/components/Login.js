@@ -48,7 +48,9 @@ const Login = (props) => {
           onChange={inputHandler}
         />
       </label>
-      <button>Submit</button>
+      <div className='button-row'>
+        <button type='submit'>Login</button>
+      </div>
     </form>
   );
 };

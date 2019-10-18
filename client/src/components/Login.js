@@ -1,6 +1,7 @@
 import React from "react";
+import axios from "axios";
 
-const Login = () => {
+const Login = (props) => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
   const [input, setInput] = React.useState({
@@ -17,7 +18,13 @@ const Login = () => {
 
   function submitHandler(e) {
     e.preventDefault()
-    // send post to login
+    axios.post(`http://localhost:5000/api/login`, input)
+    .then(resp => {
+      // console.log(resp)
+      localStorage.setItem('token', resp.data.payload)
+      props.history.push('/bubbles')
+    })
+    .catch(err => console.log(err.response))
   }
 
   return (
@@ -35,12 +42,13 @@ const Login = () => {
       <label>
         Password:&nbsp;
         <input
-          type='text'
+          type='password'
           name='password'
           value={input.password}
           onChange={inputHandler}
         />
       </label>
+      <button>Submit</button>
     </form>
   );
 };
